@@ -10,17 +10,17 @@ def run
   @input_data.each do |current|  
     possible = true
 
-    meta, round = current.split(":")
+    meta, rounds = current.split(":")
     game_id = meta.split(" ").last  
 
     max_per_color = { red: 0, green: 0, blue: 0 }
-    round.split(";").each do |iteration|
+    rounds.split(";").each do |iteration|
       iteration.split(",").each do |cubes|
-        amunt, color = cubes.split(" ")
-        max_per_color[color.to_sym] = amunt.to_i if amunt.to_i > max_per_color[color.to_sym]
+        amount, color = cubes.split(" ")
+        max_per_color[color.to_sym] = amount.to_i if amount.to_i > max_per_color[color.to_sym]
 
         next unless possible
-        possible = @cubes[color.to_sym].to_i >= amunt.to_i
+        possible = @cubes[color.to_sym].to_i >= amount.to_i
       end
     end
 
